@@ -20,6 +20,21 @@ class Node
     }
 };
 
+
+/*
+Algorithm:
+1. Create a queue of type Node* and push the root node into it.
+2. While loop:
+    a. Pop the front element of the queue and store it in a pointer p.
+    b. Ask the user to enter the left child of p->data and store it in a variable x.
+    c. If x is not equal to -1, create a new node with the value x and assign it to p->left.
+    d. Push the new node into the queue.
+    e. Ask the user to enter the right child of p->data and store it in a variable x.
+    f. If x is not equal to -1, create a new node with the value x and assign it to p->right.
+    g. Push the new node into the queue.
+3. End of while loop.
+4. End  
+*/
 void create(Node **root){
     Node *p , *t;
     int x;
