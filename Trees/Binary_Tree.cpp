@@ -36,6 +36,8 @@ class BinaryTree{
         void Inorder(Node*);
         void Postorder(Node*);
 
+        void level_order(Node*);
+
         void Preorder_non_recursive();
         void Inorder_non_recursive();
 
@@ -222,4 +224,22 @@ int BinaryTree::Equal_trees(Node *p, Node *q){
         return Equal_trees(p->lchild, q->lchild) && Equal_trees(p->rchild, q->rchild);
     }
     return 0;
+}
+
+void BinaryTree::level_order(Node *p){
+    queue<Node*> q;
+    cout<<p->data<<" ";
+    q.push(p);
+    while(!q.empty()){
+        p = q.front();
+        q.pop();
+        if(p->lchild){
+            cout<<p->lchild->data<<" ";
+            q.push(p->lchild);
+        }
+        if(p->rchild){
+            cout<<p->rchild->data<<" ";
+            q.push(p->rchild);
+        }
+    }
 }
