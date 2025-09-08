@@ -4,40 +4,37 @@
 using namespace std;
 
 // Function to find the next permutation of a vector array
-void nextPermutation(std::vector<int>& nums) {
-    //start from right
-    int i = nums.size() - 2;
-    //find first sorted pair and point at the smallest one 
-    for(i=nums.size()-2; i>=0; i--){
-        if(nums[i] < nums[i+1]){
-            break;
-        }
-    }
-    cout<<i<<endl;
-    //now i points to that smaller element in pair
-    //if i is not found, then the array is sorted in descending order
-    //so we reverse the array
-    if(i<0){
-        reverse(nums.begin(), nums.end());
-    }
-    else{
-        int j;
-        //find the element just greater than nums[i] from right
-        for(j=nums.size()-1; j>=0; j--){
-            if(nums[j] > nums[i]){
+    void nextPermutation(vector<int>& nums) {
+        int n = nums.size();
+        if(n<=1) return;
+
+        // finding pivot
+        int pivot = -1;
+        for(int i = n-1;i>0;i--){
+            if(nums[i-1]<nums[i]){
+                pivot = i-1;
                 break;
             }
         }
-        cout<<j<<endl;
-        cout<<nums[i]<<endl;
-        cout<<nums[j]<<endl;
-        //now j points to that element
-        //swap nums[i] and nums[j]
-        swap(nums[i], nums[j]);
-        //reverse the array from i+1 to end
-        reverse(nums.begin()+i+1, nums.end());
+        
+        // if no pivot, reverse the nums
+        if(pivot==-1){
+            reverse(nums.begin(), nums.end());
+            return;
+        }
+        
+        // find swap candidate from the suffix
+        for(int i=n-1;i>0;i--){
+            if(nums[i]>nums[pivot]){
+                swap(nums[i],nums[pivot]);
+                break;
+            }
+        }
+
+        //reverse the suffix
+        reverse(nums.begin()+pivot+1,nums.end());
+
     }
-}
 
 
 int main() {
