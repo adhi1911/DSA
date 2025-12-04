@@ -9,31 +9,65 @@
  *     ListNode(int x, ListNode *next) : val(x), next(next) {}
  * };
  */
+
+// fast and slow pointer approach
 class Solution {
 public:
     ListNode* removeNthFromEnd(ListNode* head, int n) {
-        ListNode* p = head; 
-        int cnt = 0;
-        while(p){
-            cnt +=1;
-            p = p->next;
+        ListNode* f = head;
+        ListNode* s = head;
+
+        for(int i =0; i<n; i++){
+            f = f->next;
         }
 
-        if(cnt == n){
+        if(!f){
+            // we gotta remove head 
             ListNode* newhead = head->next;
-            delete head; 
+            delete head;
             return newhead;
         }
 
-        p = head;
-        for(int i =0; i< cnt -n -1; i++){
-            p = p->next;
+        while(f->next){
+            f = f->next;
+            s = s->next;
         }
-        ListNode* target = p->next;
-        p->next = target->next;
+        
+        ListNode* target = s->next;
+        s->next = target->next;
         delete target;
-
         return head;
 
     }
 };
+
+
+ //// BRUTE FORCE APPROACH
+// class Solution {
+// public:
+//     ListNode* removeNthFromEnd(ListNode* head, int n) {
+//         ListNode* p = head; 
+//         int cnt = 0;
+//         while(p){
+//             cnt +=1;
+//             p = p->next;
+//         }
+
+//         if(cnt == n){
+//             ListNode* newhead = head->next;
+//             delete head; 
+//             return newhead;
+//         }
+
+//         p = head;
+//         for(int i =0; i< cnt -n -1; i++){
+//             p = p->next;
+//         }
+//         ListNode* target = p->next;
+//         p->next = target->next;
+//         delete target;
+
+//         return head;
+
+//     }
+// };
