@@ -18,3 +18,4 @@ class Solution:
 # we copy next's data into curr
 # then point curr.next t- nexts' next
 # effectively deleting next
+# 
